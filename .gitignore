@@ -1,0 +1,66 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+
+# Visual Studio
+.vscode/
+.vs/
+.vscode/
+*.code-workspace
+
+# Xamarin/Maui specific
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+*.jar
+*.pdb
+*.mdb
+*.db
+*.apk*
+*.iOS
+*.Android
+*.xcodeproj
+*.xcworkspace
+*.xcuserstate
+*.xcuserdatad
+*.dsym
+*.app
+*.dSYM.zip
+*.dSYM
+
+# macOS files
+.DS_Store
+
+# NuGet packages
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Configuration files
+appsettings.*.json
+
+# Logs
+*.log
+
+# JetBrains Rider
+.idea/
+
+# Tizen (if targeting Tizen platform)
+*.tpk
+*.wgt
+*.xml~*
+*.crash
+*.log
+*.swp
+*~
