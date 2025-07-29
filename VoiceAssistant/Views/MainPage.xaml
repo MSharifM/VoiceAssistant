@@ -1,74 +1,126 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VoiceAssistant.MainPage">
+             x:Class="VoiceAssistant.MainPage" 
+             Title="دستیار صوتی"
+             BackgroundColor="{DynamicResource SecondaryColor}">
 
     <ScrollView>
-        <Grid Padding="30,0" RowSpacing="25" ColumnSpacing="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+              RowSpacing="20"
+              Padding="20">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- Row 0: Voice Animation -->
-            <Image Grid.Row="0" Grid.ColumnSpan="2"
+            <!-- لوگو یا عکس میکروفون -->
+            <Image Grid.Row="0"
                    Source="voice_animation.gif"
                    IsAnimationPlaying="True"
-                   HeightRequest="185"
-                   Aspect="AspectFit"
-                   SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+                   HeightRequest="150"
+                   WidthRequest="150"
+                   HorizontalOptions="Center">
+                <Image.Shadow>
+                    <Shadow Brush="#40000000"
+                            Offset="0,5"
+                            Radius="10" />
+                </Image.Shadow>
+            </Image>
 
-            <!-- Row 1: Hello World -->
-            <Label Grid.Row="1" Grid.ColumnSpan="2"
-                   Text="Hello, World!"
-                   Style="{StaticResource Headline}"
-                   SemanticProperties.HeadingLevel="Level1" />
+            <Label Grid.Row="1"
+                   Text="برای تست امتحان کنید"
+                   FontSize="18"
+                   TextColor="{DynamicResource PrimaryColor}"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold" />
 
-            <!-- Row 2: Welcome -->
-            <Label Grid.Row="2" Grid.ColumnSpan="2"
-                   Text="Welcome to &#10;.NET Multi-platform App UI"
-                   Style="{StaticResource SubHeadline}"
-                   SemanticProperties.HeadingLevel="Level2"
-                   SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+            <HorizontalStackLayout Grid.Row="2"
+                                  HorizontalOptions="Center"
+                                  Spacing="15">
+                <Button Text="شروع"
+                        Clicked="OnStartClicked"
+                        WidthRequest="120"
+                        HeightRequest="50"
+                        CornerRadius="25"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold">
+                    <Button.Shadow>
+                        <Shadow Brush="#40000000"
+                                Offset="0,2"
+                                Radius="5" />
+                    </Button.Shadow>
+                </Button>
 
-            <!-- Row 3: Buttons -->
-            <HorizontalStackLayout Grid.Row="3" Grid.ColumnSpan="2" 
-                                   Spacing="20" HorizontalOptions="Fill">
-                <Button x:Name="btnStart"
-                        Text="Start" 
-                        SemanticProperties.Hint="Counts the number of times you click"
-                        Clicked="OnCounterClicked"
-                        HorizontalOptions="FillAndExpand" />
-
-                <Button x:Name="btnStop"
-                        Text="Stop" 
-                        SemanticProperties.Hint="Counts the number of times you click"
-                        Clicked="OnCounterClicked"
-                        HorizontalOptions="FillAndExpand" />
+                <Button Text="پایان"
+                        Clicked="OnStopClicked"
+                        WidthRequest="120"
+                        HeightRequest="50"
+                        CornerRadius="25"
+                        BackgroundColor="#F44336"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold">
+                    <Button.Shadow>
+                        <Shadow Brush="#40000000"
+                                Offset="0,2"
+                                Radius="5" />
+                    </Button.Shadow>
+                </Button>
             </HorizontalStackLayout>
 
-            <!-- Row 4: Log and Talking Animation -->
-            <Label x:Name="lblLog"
-                   Grid.Row="4" Grid.Column="0"
-                   Text="log"
-                   VerticalOptions="Center"/>
+            <Frame Grid.Row="3"
+                   CornerRadius="15"
+                   Padding="15"
+                   BackgroundColor="{DynamicResource TertiaryColor}"
+                   BorderColor="{DynamicResource PrimaryColor}"
+                   HorizontalOptions="Fill">
+                <HorizontalStackLayout Spacing="10"
+                                       HorizontalOptions="End">
+                    <Image Source="is_talking.gif"
+                           IsAnimationPlaying="True"
+                           HeightRequest="30"
+                           WidthRequest="30"
+                           VerticalOptions="Center" />
+                    <Label Text="لاگ فعالیت‌ها:"
+                           FontSize="16"
+                           TextColor="{DynamicResource PrimaryColor}"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold" />
+                </HorizontalStackLayout>
+            </Frame>
 
-            <Image Grid.Row="4" Grid.Column="1"
-                   Source="is_talking.gif"
-                   IsAnimationPlaying="True"
-                   Aspect="AspectFit"
-                   HeightRequest="50"
-                   VerticalOptions="Center"/>
+            <!-- لیست لاگ‌ها -->
+            <CollectionView Grid.Row="4"
+                            ItemsSource="{Binding ActivityLogs}"
+                            SelectionMode="None"
+                            HorizontalOptions="Fill">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10"
+                               Padding="10"
+                               Margin="0,0,0,10"
+                               BackgroundColor="{DynamicResource SecondaryContainer}"
+                               BorderColor="{DynamicResource Outline}">
+                            <Label Text="{Binding .}"
+                                   FontSize="14"
+                                   TextColor="{DynamicResource OnSecondaryContainer}" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
+            <!-- وضعیت فعلی -->
+            <Frame Grid.Row="5"
+                   CornerRadius="15"
+                   Padding="15"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="End">
+                <Label Text="{Binding CurrentStatus}"
+                       FontSize="16"
+                       TextColor="{DynamicResource OnPrimary}"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold" />
+            </Frame>
         </Grid>
     </ScrollView>
 
