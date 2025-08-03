@@ -35,7 +35,6 @@
                                   HorizontalOptions="Center"
                                   Spacing="15">
                 <Button Text="شروع"
-                        Clicked="OnStartClicked"
                         WidthRequest="120"
                         HeightRequest="50"
                         CornerRadius="25"
@@ -51,7 +50,6 @@
                 </Button>
 
                 <Button Text="پایان"
-                        Clicked="OnStopClicked"
                         WidthRequest="120"
                         HeightRequest="50"
                         CornerRadius="25"

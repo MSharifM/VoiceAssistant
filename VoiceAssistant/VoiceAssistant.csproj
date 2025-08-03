@@ -65,4 +65,10 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\VoiceAssistant.Core\VoiceAssistant.Core.csproj" />
+	  <ProjectReference Include="..\VoiceAssistant.DataAccess\VoiceAssistant.DataAccess.csproj" />
+	  <ProjectReference Include="..\VoiceAssistant.Platform\VoiceAssistant.Platform.csproj" />
+	</ItemGroup>
+
 </Project>
