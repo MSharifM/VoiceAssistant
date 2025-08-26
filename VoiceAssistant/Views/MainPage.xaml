@@ -1,123 +1,143 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VoiceAssistant.MainPage" 
-             Title="دستیار صوتی"
-             BackgroundColor="{DynamicResource SecondaryColor}">
+<ContentPage
+    x:Class="VoiceAssistant.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="دستیار صوتی"
+    BackgroundColor="{DynamicResource SecondaryColor}">
 
     <ScrollView>
-        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
-              RowSpacing="20"
-              Padding="20">
+        <Grid
+            Padding="20"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+            RowSpacing="20">
 
-            <!-- لوگو یا عکس میکروفون -->
-            <Image Grid.Row="0"
-                   Source="voice_animation.gif"
-                   IsAnimationPlaying="True"
-                   HeightRequest="150"
-                   WidthRequest="150"
-                   HorizontalOptions="Center">
+            <!--  لوگو یا عکس میکروفون  -->
+            <Image
+                Grid.Row="0"
+                HeightRequest="150"
+                HorizontalOptions="Center"
+                IsAnimationPlaying="True"
+                Source="voice_animation.gif"
+                WidthRequest="150">
                 <Image.Shadow>
-                    <Shadow Brush="#40000000"
-                            Offset="0,5"
-                            Radius="10" />
+                    <Shadow
+                        Brush="#40000000"
+                        Radius="10"
+                        Offset="0,5" />
                 </Image.Shadow>
             </Image>
 
-            <Label Grid.Row="1"
-                   Text="برای تست امتحان کنید"
-                   FontSize="18"
-                   TextColor="{DynamicResource PrimaryColor}"
-                   HorizontalOptions="Center"
-                   FontAttributes="Bold" />
+            <Label
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="برای تست امتحان کنید"
+                TextColor="{DynamicResource PrimaryColor}" />
 
-            <HorizontalStackLayout Grid.Row="2"
-                                  HorizontalOptions="Center"
-                                  Spacing="15">
-                <Button Text="شروع"
-                        WidthRequest="120"
-                        HeightRequest="50"
-                        CornerRadius="25"
-                        BackgroundColor="#4CAF50"
-                        TextColor="White"
-                        FontSize="16"
-                        FontAttributes="Bold">
+            <HorizontalStackLayout
+                Grid.Row="2"
+                HorizontalOptions="Center"
+                Spacing="15">
+                <Button
+                    BackgroundColor="#4CAF50"
+                    Clicked="OnClickBtnStart"
+                    CornerRadius="25"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Text="شروع"
+                    TextColor="White"
+                    WidthRequest="120">
+
                     <Button.Shadow>
-                        <Shadow Brush="#40000000"
-                                Offset="0,2"
-                                Radius="5" />
+                        <Shadow
+                            Brush="#40000000"
+                            Radius="5"
+                            Offset="0,2" />
                     </Button.Shadow>
                 </Button>
 
-                <Button Text="پایان"
-                        WidthRequest="120"
-                        HeightRequest="50"
-                        CornerRadius="25"
-                        BackgroundColor="#F44336"
-                        TextColor="White"
-                        FontSize="16"
-                        FontAttributes="Bold">
+                <Button
+                    BackgroundColor="#F44336"
+                    CornerRadius="25"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Text="پایان"
+                    TextColor="White"
+                    WidthRequest="120">
                     <Button.Shadow>
-                        <Shadow Brush="#40000000"
-                                Offset="0,2"
-                                Radius="5" />
+                        <Shadow
+                            Brush="#40000000"
+                            Radius="5"
+                            Offset="0,2" />
                     </Button.Shadow>
                 </Button>
             </HorizontalStackLayout>
 
-            <Frame Grid.Row="3"
-                   CornerRadius="15"
-                   Padding="15"
-                   BackgroundColor="{DynamicResource TertiaryColor}"
-                   BorderColor="{DynamicResource PrimaryColor}"
-                   HorizontalOptions="Fill">
-                <HorizontalStackLayout Spacing="10"
-                                       HorizontalOptions="End">
-                    <Image Source="is_talking.gif"
-                           IsAnimationPlaying="True"
-                           HeightRequest="30"
-                           WidthRequest="30"
-                           VerticalOptions="Center" />
-                    <Label Text="لاگ فعالیت‌ها:"
-                           FontSize="16"
-                           TextColor="{DynamicResource PrimaryColor}"
-                           VerticalOptions="Center"
-                           FontAttributes="Bold" />
+            <Frame
+                Grid.Row="3"
+                Padding="15"
+                BackgroundColor="{DynamicResource TertiaryColor}"
+                BorderColor="{DynamicResource PrimaryColor}"
+                CornerRadius="15"
+                HorizontalOptions="Fill">
+                <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                    <Image
+                        HeightRequest="30"
+                        IsAnimationPlaying="True"
+                        Source="is_talking.gif"
+                        VerticalOptions="Center"
+                        WidthRequest="30" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="لاگ فعالیت‌ها:"
+                        TextColor="{DynamicResource PrimaryColor}"
+                        VerticalOptions="Center" />
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- لیست لاگ‌ها -->
-            <CollectionView Grid.Row="4"
-                            ItemsSource="{Binding ActivityLogs}"
-                            SelectionMode="None"
-                            HorizontalOptions="Fill">
+            <!--  لیست لاگ‌ها  -->
+            <CollectionView
+                Grid.Row="4"
+                HorizontalOptions="Fill"
+                ItemsSource="{Binding ActivityLogs}"
+                SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="10"
-                               Padding="10"
-                               Margin="0,0,0,10"
-                               BackgroundColor="{DynamicResource SecondaryContainer}"
-                               BorderColor="{DynamicResource Outline}">
-                            <Label Text="{Binding .}"
-                                   FontSize="14"
-                                   TextColor="{DynamicResource OnSecondaryContainer}" />
+                        <Frame
+                            Margin="0,0,0,10"
+                            Padding="10"
+                            BackgroundColor="{DynamicResource SecondaryContainer}"
+                            BorderColor="{DynamicResource Outline}"
+                            CornerRadius="10">
+                            <Label
+                                FontSize="14"
+                                Text="{Binding .}"
+                                TextColor="{DynamicResource OnSecondaryContainer}" />
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- وضعیت فعلی -->
-            <Frame Grid.Row="5"
-                   CornerRadius="15"
-                   Padding="15"
-                   BackgroundColor="{DynamicResource PrimaryColor}"
-                   HorizontalOptions="Fill"
-                   VerticalOptions="End">
-                <Label Text="{Binding CurrentStatus}"
-                       FontSize="16"
-                       TextColor="{DynamicResource OnPrimary}"
-                       HorizontalOptions="Center"
-                       FontAttributes="Bold" />
+            <Label x:Name="txtLog" Text="Empty" />
+            <!--  وضعیت فعلی  -->
+            <Frame
+                Grid.Row="5"
+                Padding="15"
+                BackgroundColor="{DynamicResource PrimaryColor}"
+                CornerRadius="15"
+                HorizontalOptions="Fill"
+                VerticalOptions="End">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="{Binding CurrentStatus}"
+                    TextColor="{DynamicResource OnPrimary}" />
             </Frame>
         </Grid>
     </ScrollView>
